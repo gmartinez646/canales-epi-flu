@@ -1,5 +1,7 @@
-epi_plot_channel_custom <- function (joined_channel, year, n_breaks = 10)
+epi_plot_channel_custom <- function (joined_channel, n_breaks = 10)
 {
+  year = as.character(unique(joined_channel$var_year))
+  
   joined_channel %>% 
     group_by(var_admx) %>% 
     mutate(new = max(c(var_event_count, upp_95), na.rm = T), ) %>%
@@ -9,7 +11,7 @@ epi_plot_channel_custom <- function (joined_channel, year, n_breaks = 10)
               stat = "identity") + geom_area(aes(x = var_week, 
                                                  y = median), fill = "#3e9e39", stat = "identity") + 
     geom_area(aes(x = var_week, y = low_95), fill = "white", 
-              stat = "identity") + geom_line(size = 0.8, aes(color=year)) + scale_color_manual(name = "", values = 1)  + scale_x_continuous(breaks = scales::pretty_breaks(n = {
+              stat = "identity") + geom_line(size = 0.8, aes(color = year)) + scale_color_manual(name = "", values = 1)  + scale_x_continuous(breaks = scales::pretty_breaks(n = {
                 {
                   n_breaks
                 }
@@ -18,7 +20,7 @@ epi_plot_channel_custom <- function (joined_channel, year, n_breaks = 10)
 
 ###EJEMPLO
 
-epi_plot_channel_custom(join, "2021")+
+epi_plot_channel_custom(join)+
   labs(title = "Corredor gripe 2014 - 2020",
        caption = "Fuente: SNVS",
        x = "Semanas",
