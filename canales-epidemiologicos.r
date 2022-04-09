@@ -80,7 +80,7 @@ epi_plot_channel(join)+
        ) +
   theme_bw()
 
-epi_plot_channel_custom(join, "2021")+
+epi_plot_channel_custom(join)+
   labs(title = "Corredor gripe 2014 - 2020",
        caption = "Fuente: SNVS",
        x = "Semanas",
@@ -88,5 +88,4 @@ epi_plot_channel_custom(join, "2021")+
   ) +
   labs(color = "Name") +
   theme_bw()
-
 
